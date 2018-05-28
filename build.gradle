@@ -1,0 +1,32 @@
+buildscript {
+    ext.kotlin_version = '1.2.41'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.0-alpha15'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    buildToolsVersion = '27.0.3'
+    supportLibraryVersion = '27.1.1'
+    playServicesVersion = '15.0.1'
+    constraintLayoutversion = '1.1.0'
+    retrofitVersion = '2.4.0'
+    okhttpVersion = '3.10.0'
+    picassoVersion = '2.71828'
+}

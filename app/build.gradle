@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.lucasmoresco.marvel"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", 'API_URL', '"https://gateway.marvel.com/v1/public/"'
+            buildConfigField "String", 'MARVEL_PUBLIC_KEY', MARVEL_PUBLIC_KEY
+            buildConfigField "String", 'MARVEL_PRIVATE_KEY', MARVEL_PRIVATE_KEY
+        }
+        debug {
+            buildConfigField "String", 'API_URL', '"https://gateway.marvel.com/v1/public/"'
+            buildConfigField "String", 'MARVEL_PUBLIC_KEY', MARVEL_PUBLIC_KEY
+            buildConfigField "String", 'MARVEL_PRIVATE_KEY', MARVEL_PRIVATE_KEY
+        }
+
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutversion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+    implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
+
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    kapt "android.arch.lifecycle:compiler:1.1.1"
+    implementation 'android.arch.persistence.room:runtime:1.1.1-rc1'
+    kapt "android.arch.persistence.room:compiler:1.1.1-rc1"
+    implementation 'android.arch.paging:runtime:1.0.0'
+
+}
