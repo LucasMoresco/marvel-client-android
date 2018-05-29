@@ -6,6 +6,10 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+def localPropertiesFile = rootProject.file("local.properties")
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(localPropertiesFile))
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -22,13 +26,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", 'API_URL', '"https://gateway.marvel.com/v1/public/"'
-            buildConfigField "String", 'MARVEL_PUBLIC_KEY', MARVEL_PUBLIC_KEY
-            buildConfigField "String", 'MARVEL_PRIVATE_KEY', MARVEL_PRIVATE_KEY
+            buildConfigField "String", 'MARVEL_PUBLIC_KEY', localProperties['MARVEL_PUBLIC_KEY']
+            buildConfigField "String", 'MARVEL_PRIVATE_KEY', localProperties['MARVEL_PRIVATE_KEY']
         }
         debug {
             buildConfigField "String", 'API_URL', '"https://gateway.marvel.com/v1/public/"'
-            buildConfigField "String", 'MARVEL_PUBLIC_KEY', MARVEL_PUBLIC_KEY
-            buildConfigField "String", 'MARVEL_PRIVATE_KEY', MARVEL_PRIVATE_KEY
+            buildConfigField "String", 'MARVEL_PUBLIC_KEY', localProperties['MARVEL_PUBLIC_KEY']
+            buildConfigField "String", 'MARVEL_PRIVATE_KEY', localProperties['MARVEL_PRIVATE_KEY']
         }
 
     }
