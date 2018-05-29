@@ -35,7 +35,7 @@ data class Result(
         val series: Series,
         val stories: Stories,
         val events: Events,
-        val urls: List<Url>
+        val urls: ArrayList<Url>
 ) : Parcelable
 
 @Parcelize

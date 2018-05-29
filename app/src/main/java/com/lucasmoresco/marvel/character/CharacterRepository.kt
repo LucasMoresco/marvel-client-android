@@ -10,12 +10,12 @@ import com.lucasmoresco.marvel.character.entities.Result
 
 class CharacterRepository {
 
-    fun refreshCharacters(offset: Int?): MutableLiveData<List<Result>> {
+    fun refreshCharacters(offset: Int?, query: String?): MutableLiveData<List<Result>> {
 
         val data = MutableLiveData<List<Result>>()
-
         val apiService = ApiService.create()
-        apiService.getCharacters(offset).enqueue(object : SimpleCallback<Character>() {
+
+        apiService.getCharacters(offset, query).enqueue(object : SimpleCallback<Character>() {
 
             override fun success(t: Character?) {
 

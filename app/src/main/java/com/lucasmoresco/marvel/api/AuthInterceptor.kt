@@ -4,7 +4,6 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
 
-
 internal class AuthInterceptor(private val publicKey: String, private val privateKey: String, private val timeProvider: TimeProvider) : Interceptor {
     private val authHashGenerator = AuthHashGenerator()
 

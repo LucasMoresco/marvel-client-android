@@ -8,8 +8,8 @@ class CharacterViewModel : ViewModel() {
 
     private val characterRepository: CharacterRepository? = CharacterRepository()
 
-    fun fetchCharacters(offset: Int?): MutableLiveData<List<Result>>? {
-        return characterRepository?.refreshCharacters(offset)
+    fun fetchCharacters(offset: Int?, query: String?): MutableLiveData<List<Result>>? {
+        return characterRepository?.refreshCharacters(offset, query)
     }
 
 }

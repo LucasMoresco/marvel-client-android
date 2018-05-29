@@ -8,43 +8,95 @@
         android:id="@+id/toolbarDetailCharacter"
         layout="@layout/toolbar" />
 
-    <ImageView
-        android:id="@+id/imageCharacter"
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:layout_below="@+id/toolbarDetailCharacter"
-        android:background="@color/colorPrimary"
-        android:scaleType="centerCrop" />
-
-    <TextView
-        android:id="@+id/textCharacterName"
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/imageCharacter"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:ellipsize="end"
-        android:gravity="center_vertical"
-        android:lines="1"
-        android:maxLines="2"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Customer Name" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbarDetailCharacter">
 
-    <TextView
-        android:id="@+id/textCharacterDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textCharacterName"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
-        android:ellipsize="end"
-        android:maxLines="8"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        tools:text="Customer Desc" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/imageCharacter"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:background="@color/colorPrimary"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/textCharacterName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/imageCharacter"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Customer Name" />
+
+            <TextView
+                android:id="@+id/textCharacterDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textCharacterName"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="18dp"
+                android:ellipsize="end"
+                android:maxLines="8"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                tools:text="Customer Desc" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textCharacterDescription"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonActionDetail"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:text="@string/activity_detail_button_detail"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+                <Button
+                    android:id="@+id/buttonActionWiki"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:text="@string/activity_detail_button_wiki"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+                <Button
+                    android:id="@+id/buttonActionComicLink"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:text="@string/activity_detail_button_comic_link"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

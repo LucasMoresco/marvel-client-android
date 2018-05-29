@@ -29,7 +29,6 @@ interface ApiService {
             }
 
             val client = builder.build()
-
             val baseUrl = BuildConfig.API_URL
             retrofit = Retrofit.Builder()
                     .client(client)
@@ -42,6 +41,6 @@ interface ApiService {
     }
 
     @GET("characters")
-    fun getCharacters(@Query("offset") offset: Int?): Call<Character>
+    fun getCharacters(@Query("offset") offset: Int?, @Query("name") name: String?): Call<Character>
 
 }

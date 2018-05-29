@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Marvel Characters</string>
     <string name="no_results">No results 😓</string>
+    <string name="activity_detail_button_detail">Detail</string>
+    <string name="activity_detail_button_wiki">Wiki</string>
+    <string name="activity_detail_button_comic_link">Comic Link</string>
+    <string name="search_title">Pesquisar…</string>
 </resources>

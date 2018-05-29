@@ -26,6 +26,8 @@ ext {
     supportLibraryVersion = '27.1.1'
     playServicesVersion = '15.0.1'
     constraintLayoutversion = '1.1.0'
+    archLifecycleVersion = '1.1.1'
+    archPersistenceVersion = '1.1.1-rc1'
     retrofitVersion = '2.4.0'
     okhttpVersion = '3.10.0'
     picassoVersion = '2.71828'

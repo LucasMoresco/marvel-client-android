@@ -12,4 +12,10 @@
         <item name="windowActionModeOverlay">true</item>
     </style>
 
+    <style name="SearchViewStyle" parent="AppTheme.NoActionBar">
+        <item name="searchIcon">@null</item>
+        <item name="searchHintIcon">@null</item>
+        <item name="queryHint">@string/search_title</item>
+    </style>
+
 </resources>

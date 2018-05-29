@@ -4,9 +4,13 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.SearchView
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
 import com.lucasmoresco.marvel.character.CharacterViewModel
 import com.lucasmoresco.marvel.character.entities.Result
 import com.lucasmoresco.marvel.character.ui.CharacterAdapter
@@ -16,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 const val ITEMS_PER_PAGE = 20
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private var characters: MutableList<Result>? = mutableListOf()
     private var characterViewModel: CharacterViewModel? = null
@@ -30,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         characterViewModel = ViewModelProviders.of(this).get(CharacterViewModel::class.java)
         setupAdapter()
+        setupSearchView()
         getMarvelCharacters()
 
     }
@@ -59,22 +64,46 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun characterItemClicked(character: Result) {
-        val bundle = Bundle()
-        bundle.putString("CHARACTER_IMAGE_URL", character.thumbnail.path)
-        bundle.putString("CHARACTER_NAME", character.name)
-        bundle.putString("CHARACTER_DESC", character.description)
-        val intent = Intent(this, DetailCharacterActivity::class.java)
-        intent.putExtras(bundle)
-        startActivity(intent)
+    private fun setupSearchView() {
+        val searchClose = searchView.findViewById<ImageView>(android.support.v7.appcompat.R.id.search_close_btn)
+        searchClose?.setColorFilter(R.color.black)
+        val searchEditText = searchView.findViewById<EditText>(android.support.v7.appcompat.R.id.search_src_text)
+        searchEditText?.setTextColor(ContextCompat.getColor(this, R.color.black))
+        searchEditText?.setTextColor(ContextCompat.getColor(this, R.color.black))
+        searchEditText?.setHintTextColor(ContextCompat.getColor(this, R.color.gray_light4))
+
+        searchView.isActivated = true
+        searchView.queryHint = getString(R.string.search_title)
+        searchView.onActionViewExpanded()
+        searchView.isIconified = false
+        searchView.clearFocus()
+        searchView.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        currentPage = 0
+        characters?.clear()
+        getMarvelCharacters(query)
+        return true
     }
 
 
-    fun getMarvelCharacters() {
+    override fun onQueryTextChange(newText: String?): Boolean {
+        when {
+            newText!!.isBlank() -> {
+                characters?.clear()
+                getMarvelCharacters()
+            }
+        }
+        return true
+    }
+
+    fun getMarvelCharacters(query: String? = null) {
 
         progressLoadingContent.visibility = View.VISIBLE
+        textEmptyList.visibility = View.GONE
 
-        characterViewModel?.fetchCharacters(currentPage)?.observe(this, Observer<List<Result>> { characters ->
+        characterViewModel?.fetchCharacters(currentPage, query)?.observe(this, Observer<List<Result>> { characters ->
 
             characters?.let {
 
@@ -90,10 +119,18 @@ class MainActivity : AppCompatActivity() {
                     textEmptyList.visibility = View.GONE
                     recyclerCharacter.visibility = View.VISIBLE
                 }
-
             }
-
         })
+    }
 
+    private fun characterItemClicked(character: Result) {
+        val bundle = Bundle()
+        bundle.putString("CHARACTER_IMAGE_URL", character.thumbnail.path)
+        bundle.putString("CHARACTER_NAME", character.name)
+        bundle.putString("CHARACTER_DESC", character.description)
+        bundle.putParcelableArrayList("URLS", character.urls)
+        val intent = Intent(this, DetailCharacterActivity::class.java)
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 }
