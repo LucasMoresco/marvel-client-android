@@ -1,4 +1,4 @@
-package com.lucasmoresco.marvel
+package com.lucasmoresco.marvel.character.ui
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -11,16 +11,15 @@ import android.support.v7.widget.SearchView
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import com.lucasmoresco.marvel.R
 import com.lucasmoresco.marvel.character.CharacterViewModel
 import com.lucasmoresco.marvel.character.entities.Result
-import com.lucasmoresco.marvel.character.ui.CharacterAdapter
-import com.lucasmoresco.marvel.character.ui.DetailCharacterActivity
 import com.lucasmoresco.marvel.util.PaginationScrollListener
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_characters.*
 
 const val ITEMS_PER_PAGE = 20
 
-class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+class CharactersActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private var characters: MutableList<Result>? = mutableListOf()
     private var characterViewModel: CharacterViewModel? = null
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_characters)
 
         characterViewModel = ViewModelProviders.of(this).get(CharacterViewModel::class.java)
         setupAdapter()
